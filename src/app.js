@@ -2,7 +2,7 @@ const path = require('path')
 const request= require('request')
 const express= require('express')
 const app = express()
-
+const port = process.env.PORT || 3000
 
 console.log(__filename)
 console.log(path.join(__dirname,'../public'))
@@ -17,9 +17,7 @@ app.get('/signup',(req,res)=>{
 app.get('/about',(req,res)=>{
     res.send('about')
 })
-app.listen(3000, ()=> {
-    console.log('server is up on port 3000')
-})
+
 const geocode= (address, callback)=>{
     const gurl = 'https://api.mapbox.com/geocoding/v5/mapbox.places/'+ encodeURIComponent(address) +'.json?access_token=pk.eyJ1IjoiYWFkaXRpLWthcHJlIiwiYSI6ImNrcm95dzVuYzFicWYycm52MzdsOGdjd3QifQ.cCWI9_l1UeX0qfKbfJJjuQ'
       request({url:gurl,json:true},(error,response)=>{
@@ -74,3 +72,6 @@ app.get('/weather',(req, res)=>{
        
 })
 
+app.listen(port, ()=> {
+    console.log('server is up on port 3000')
+})
